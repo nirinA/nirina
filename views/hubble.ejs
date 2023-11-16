@@ -1,0 +1,48 @@
+<%- include('head', {title: 'hubble'}); -%>
+<%- include('header'); -%>
+<%- include('homebanner'); -%>
+<%- include('banner'); -%>
+    <div id="maindisplay">
+    <h1><%= data.title %></h1>
+   
+<% for(var i=0; i < data.items.length; i++) { %>
+   <div> <h2><%= data.items[i].title %></h2></div>
+   <div class="hubbleContent item-<%= i %>"><%- data.items[i].content %>
+   <br/>
+   <a href="<%= data.items[i].link %>"><%= data.items[i].link %></a></div>
+<% } %>
+    </div>
+<script>
+$( () => {
+   let n_im = 0;
+    for(let i = 0; i < <%= data.items.length %>; i++) {
+        n_im += 1
+    	$(".hubbleContent.item-"+i).hide();
+        $('<button></button>')
+	    .insertAfter(".hubbleContent.item-"+i)
+	    .addClass('buttonItem'+i)
+	    .html('show');
+	$('.buttonItem'+i).click( () => {
+            $(".hubbleContent.item-"+i).toggle( () => {
+	        if ($('.buttonItem'+i).html() === 'show') {
+		    $('.buttonItem'+i).html('hide');
+		} else {
+		    $('.buttonItem'+i).html('show');
+		}
+	    });
+	});
+    }
+
+    /* replace wrong img src in content*/
+    for (var i=0; i<n_im; i++) {
+	let text = $('.hubbleContent.item-'+i).html();
+	let change = text.replace('img src="http:\/\/www.spacetelescope.org', 'img src="');
+	$('.hubbleContent.item-'+i).html(change);
+    }
+});
+</script>
+<script>
+//$(".news").addClass("noaction");
+$( () => { footerbox.lastUpdate();});
+</script>
+<%- include('footer'); -%>

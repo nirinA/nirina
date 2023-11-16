@@ -1,0 +1,45 @@
+<%- include('head', {title: 'wiki'}); -%>
+<%- include('header'); -%>
+<%- include('homebanner'); -%>
+<%- include('banner'); -%>
+
+<% for(var i=0; i < data.length; i++) { %>
+<div id="wiki_<%= i %>" style="display:none;">
+<h2 style="text-align:center;"><%- data[i].name %></h2>
+<br>
+<%- data[i].content %>
+</div>
+<% } %>
+
+<div id="maindisplay">
+    <div id="next" class="action" style="float:right;">&nbsp; &gt; &nbsp;</div>
+    <div id="previous" class="action" style="float:right;">&nbsp; &lt; &nbsp; </div>
+    <div id="wikiDisplay"></div>
+    <hr>
+    <a href="/wiki/create">create</a>
+</div>
+<!--
+https://fr.wikipedia.org/wiki/Charles_Baudelaire#/media/Fichier:Le_port_manuscrit_de_Baudelaire.jpg
+-->
+<script>
+$(document).ready(function() {
+    let l = <%= data.length %>, p = 0;
+    $("#wikiDisplay").html($("#wiki_"+p).html());
+    $("#previous").click( (event) => {
+        p--;
+	if (p < 0) p = l-1;
+	$("#wikiDisplay").html($("#wiki_"+p).html());
+    });
+    $("#next").click( (event) => {
+        ++p;
+	if ( p >= l) p = 0;
+	$("#wikiDisplay").html($("#wiki_"+p).html());
+    });
+    $("<a href='/wiki/edit'>edit wiki</a>").insertAfter("#wikiDisplay");
+});
+</script>
+<script>
+$(".wiki").addClass("noaction");
+$( () => { footerbox.lastUpdate();});
+</script>
+<%- include('footer'); -%>

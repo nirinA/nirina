@@ -1,0 +1,26 @@
+<%- include('head', {title: 'atel'}); -%>
+<%- include('header'); -%>
+<%- include('homebanner'); -%>
+<%- include('banner'); -%>
+    <div id="maindisplay">
+    <h1><%= data.title %></h1>
+    <h2><%= data.description %></h2>
+<% for(var i=0; i < data.items.length; i++) { %>
+   <h3><%- data.items[i].title %></h3>
+   <div><%- data.items[i].content %>
+   <br>
+   <a href="<%- data.items[i].link %>"><%- data.items[i].link %></a>
+   <br>
+   date: <%- data.items[i].date %>
+   <br>
+   creator: <%- data.items[i].creator %>
+   </div>
+   <hr>
+<% } %>
+
+    </div>
+<script>
+    //$(".news").addClass("noaction");
+    $( () => { footerbox.lastUpdate();});
+</script>
+<%- include('footer'); -%>

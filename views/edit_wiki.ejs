@@ -1,0 +1,18 @@
+<%- include('head', {title: 'edit wiki'}); -%>
+<%- include('header'); -%>
+<!--
+<%- include('homebanner'); -%>
+-->
+<%- include('banner'); -%>
+    <div id="maindisplay">
+only registered user can edit wiki
+<hr>
+<a href="/wiki/create">create</a>
+<div id="nwiki"></div>
+</div>
+
+<script>
+//$(".wiki").addClass("noaction");
+$( () => { footerbox.lastUpdate();});
+</script>
+<%- include('footer'); -%>

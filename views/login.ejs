@@ -1,0 +1,41 @@
+<%- include('head', {title: 'login'}); -%>
+<%- include('header'); -%>
+<%- include('homebanner'); -%>
+<%- include('banner'); -%>
+
+<div id="maindisplay">
+<h1><%= title %></h1>
+login / register are temporarily unavailable
+</div>
+<script>
+$( () => {
+    $("#maindisplay").prepend('<div id="datebox"></div>');
+    FormatDate.FullClock();
+    $('<div id="fortune_text"></div>').insertAfter("#datebox");
+    //$("#fortune_text").load("https://apod.nasa.gov/apod.rss");
+
+/*
+$.ajax(
+    {
+        dataType: "json",
+	//url: "https://apod.nasa.gov/apod.rss", //> CORS ERROR
+        url: "https://helloacm.com/api/fortune/", 
+        cache: false,
+	//headers: {
+        //'Content-Type': 'application/x-www-form-urlencoded'
+	//},
+	//type: "POST", // or type:"GET" or type:"PUT" 
+        success: function (response) {
+	  $("#fortune_text").html(response);
+        },
+	//error: function () {
+        //  $("#fortune_text").html("Error: CORS");
+	//}
+    })
+   */
+});
+
+</script>
+
+<script>$(".<%= title %>").addClass("noaction");</script>
+<%- include('footer'); -%>

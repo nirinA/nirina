@@ -1,0 +1,78 @@
+<%- include('head', {title: 'nirinA'}); -%>
+<%- include('header'); -%>
+<%- include('homebanner'); -%>
+<%- include('banner'); -%>
+
+<div id="maindisplay">
+
+     <h1 id=niimg>nirin</h1>
+
+     <div class="blackFlagContainer">
+     <h2 style="position:relative;left:135px;top:10px;">ni dieu, ni ma&icirc;tre</h2>
+     	 <div style="position:relative;left:5px;top:-90px;">
+	 <img width="450" alt="Anarchist black flag" src="https://upload.wikimedia.org/wikipedia/commons/9/95/BlackFlagSymbol.svg">
+	 </div>&#9398;
+<div style="position:relative;left:5px;top: 0px;">
+    <a href="https://www.monde-libertaire.fr/">le monde libertaire</a><br>
+    <a href="https://fr.theanarchistlibrary.org/special/index">la biblioth&egrave;que anarchiste</a><br>
+    <a href="https://www.federation-anarchiste.org/">f&eacute;d&eacute;ration anarchiste</a><br>
+    <a href="https://www.infolibertaire.net/">https://www.infolibertaire.net</a><br>
+    </div>
+    </div>
+
+
+    <div class="blackCatContainer">
+	 <h1 style="position:relative;left:165px;top:50px;z-index:2;margin:0;padding:0;">A&nbsp;C&nbsp;A&nbsp;B</h1>
+	 <div style="position:relative;left:5px;top:10px;z-index:1;" >
+	 <a title="Ralph Hosea Chaplin (1887–1961), Public domain, via Wikimedia Commons" href="https://commons.wikimedia.org/wiki/File:Anarchist_back_cat.jpg"><img width="450" alt="Anarchist back cat" src="https://upload.wikimedia.org/wikipedia/commons/3/3b/Anarchist_back_cat.jpg"></a>
+	 </div>
+
+	 <h2 class="acab" style="position:relative;left:20px;top:-20px;z-index:2;margin:0;padding:0;">All Cats Are Beautiful</h2>
+
+	    <a href="https://www.anarchistfederation.net/">anarchist federation</a><br>
+	    <a href="https://theanarchistlibrary.org/">the anarchist library</a><br>
+	    <a href="https://www.anarchistlibraries.net/libraries">https://www.anarchistlibraries.net/libraries</a><br>
+	    <a href="https://www.elephanteditions.net/special/index">https://www.elephanteditions.net/special/index</a><br>
+	    <a href="https://phys.org/news/2023-08-china-ancient-pipe-networks-communal.html">anarchism is not new</a><br />
+    </div>
+
+    <a href="https://www.marxists.org/">marxist internet archive</a><br>
+    <a href="https://www.marxist.com/">in defense of marxism</a><br>
+    <a href="https://alencontre.org/">&agrave; l&#39;encontre&#45;la br&ecirc;che</a><br>
+    <a href="http://revueperiode.net/">p&eacute;riode.</a><br>
+    <a href="https://www.contretemps.eu/">contretemps</a><br>
+
+</div>
+
+<script>
+$( () => {
+    $("#maindisplay").prepend('<div id="datebox"></div>');
+    FormatDate.FullClock();
+    $('<div id="fortune_text"></div>').insertAfter("#datebox");
+    //$("#fortune_text").load("https://apod.nasa.gov/apod.rss");
+
+
+$.ajax(
+    {
+        dataType: "json",
+	//url: "https://apod.nasa.gov/apod.rss", //> CORS ERROR
+        url: "https://helloacm.com/api/fortune/", 
+        cache: false,
+	//headers: {
+        //'Content-Type': 'application/x-www-form-urlencoded'
+	//},
+	//type: "POST", // or type:"GET" or type:"PUT" 
+        success: function (response) {
+	  $("#fortune_text").html(response);
+        },
+	//error: function () {
+        //  $("#fortune_text").html("Error: CORS");
+	//}
+    })
+   
+});
+
+
+</script>
+<script>$(".home").addClass("noaction");</script>
+<%- include('footer'); -%>

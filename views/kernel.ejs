@@ -1,0 +1,20 @@
+<%- include('head', {title: 'kernel'}); -%>
+<%- include('header'); -%>
+<%- include('homebanner'); -%>
+<%- include('banner'); -%>
+    <div id="maindisplay">
+    <h1><%= data.title %></h1>
+    
+<% for(var i=0; i < data.items.length; i++) { %>
+   <h3><%- data.items[i].title %></h3>
+   <div><%- data.items[i].content %></div>
+   <hr>
+<% } %>
+
+    </div>
+    <script>
+    //$(".news").addClass("noaction");
+    $( () => { footerbox.lastUpdate();});
+    </script>
+
+<%- include('footer'); -%>

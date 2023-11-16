@@ -1,0 +1,10 @@
+<h1><%= message %></h1>
+<h2><%= error.status %></h2>
+<% if(error.status === 404){ %>
+this page is gone back to the future
+<% } else { %>
+there are errors that made me fool!
+<% } %>
+<!--
+<pre><%= error.stack %></pre>
+-->

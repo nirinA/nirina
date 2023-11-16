@@ -1,0 +1,41 @@
+<%- include('head', {title: 'wiki'}); -%>
+
+
+<script src="https://cdn.tiny.cloud/1/wcxniju75nu1m3mo4vptrzocf7qruc8omcdxaamzgfk44h0x/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
+
+<%#
+<script src="/javascripts/tinymce/js/tinymce/tinymce.min.js"></script>
+#%>
+
+<%- include('header'); -%>
+    <%- include('banner', {page_id: 'wiki'}); -%>
+    <div id="maindisplay">
+	<h1>wiki</h1>
+	<div id="wikidisplay">
+	<form name="post_new_wiki" action="/wiki/put_wiki" method="post">
+	new wiki name : <input type="text" name="wikiname" size="25" />
+	<div>  <textarea name="content">
+	Welcome to TinyMCE!
+	<br>
+	Only registered user can create or edit wiki!
+	</textarea></div>
+	<input class="ui-state-disabled" type="submit" />
+	<input type="button" onclick="location.href='/wiki'" value="Cancel"/>
+	</form>
+	</div>
+    </div>
+      <script>
+    tinymce.init({
+      selector: 'textarea',
+      plugins: 'advlist link image media lists save',
+      toolbar: 'undo redo save | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | align lineheight | tinycomments | checklist numlist bullist indent outdent | emoticons charmap | removeformat',
+      tinycomments_mode: 'embedded',
+      tinycomments_author: 'Author name',
+      mergetags_list: [
+        { value: 'First.Name', title: 'First Name' },
+        { value: 'Email', title: 'Email' },
+      ],
+      ai_request: (request, respondWith) => respondWith.string(() => Promise.reject("See docs to implement AI Assistant")),
+    });
+  </script>
+<%- include('footer'); -%>

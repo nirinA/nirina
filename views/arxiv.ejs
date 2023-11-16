@@ -1,0 +1,55 @@
+<%- include('head', {title: 'arXiv'}); -%>
+<script>
+MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\\(', '\\)']]
+  }
+};
+</script>
+<script id="MathJax-script" async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
+</script>
+<%- include('header'); -%>
+<%- include('homebanner'); -%>
+<%- include('banner'); -%>
+    <div id="maindisplay">
+    <h1><%= data.title %></h1>
+    <h2><%= data.description %></h2>
+<% for(var i=0; i < data.items.length; i++) { %>
+   <h3><%- data.items[i].title %></h3>
+   <div class="arxiv-item-<%= i %>">
+   <div><%- data.items[i].content %></div>
+   <br>
+   <div><a href="<%- data.items[i].link %>"><%- data.items[i].link %></a></div>
+   <br>
+   <div><%- data.items[i].creator %></div>
+   </div>
+   <hr>
+<% } %>
+
+    </div>
+<script>
+$( () => {
+    for(let i = 0; i < <%= data.items.length %>; i++) {
+    	$(".arxiv-item-"+i).hide();
+        $('<button></button>')
+	    .insertAfter(".arxiv-item-"+i)
+	    .addClass('buttonItem'+i)
+	    .html('show abstract');
+	$('.buttonItem'+i).click( () => {
+            $(".arxiv-item-"+i).toggle( () => {
+	        if ($('.buttonItem'+i).html() === 'show abstract') {
+		    $('.buttonItem'+i).html('hide abstract');
+		} else {
+		    $('.buttonItem'+i).html('show abstract');
+		}
+	    });
+	});
+    }
+});
+</script>
+<script>
+    //$(".news").addClass("noaction");
+    $( () => { footerbox.lastUpdate();});
+</script>
+<%- include('footer'); -%>

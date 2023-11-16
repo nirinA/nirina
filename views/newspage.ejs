@@ -1,0 +1,103 @@
+<%- include('head', {title: 'newspage'}); -%>
+<%- include('header'); -%>
+<%- include('homebanner'); -%>
+<%- include('banner'); -%>
+    <div id="maindisplay">
+    <h3> arXiv </h3>
+    <ul>
+    <% var plain_arXiv = ["Astrophysics",
+		  "Condensed Matter",
+		  "Computer Science",
+		  "Electrical Engineering and Systems Science",
+		  "General Relativity and Quantum Cosmology",
+		  "High Energy Physics - Experiment",
+		  "High Energy Physics - Lattice",
+		  "High Energy Physics - Phenomenology",
+		  "High Energy Physics - Theory",
+		  "Mathematics",
+		  "Mathematical Physics",
+		  "Nonlinear Sciences",
+		  "Nuclear Experiment",
+		  "Nuclear Theory",
+		  "Physics",
+		  "Quantitative Biology",
+		  "Quantum Physics",
+		  "Statistics"] %>
+    <% var plain_nature = ["Computational Science", "Astronomy",
+       	   		   "Biomedical Engineering", "Energy", "Nanotechnology",
+			   "Machine Intelligence", "Biotechnology",
+			   "Methods", "Ecology and Evolution",
+			   "Microbiology", "Genetics"] %>
+    <% for (var i = 0; i < list_arXiv.length;  i++ ) { %>
+    <li>
+    <a href='/newspage/arxiv/<%= list_arXiv[i] %>' ><%= plain_arXiv[i] %> </a>
+    </li>
+    <% } %>
+    </ul>
+    <h3>phys.org</h3>
+    <ul>
+    <li><a href='/newspage/physorg'>phys.org</a></li>
+    </ul>
+    <h3>physics world</h3>
+    <ul>
+    <li><a href=/newspage/physicsworld>physicsworld</a></li>
+    </ul>
+
+    <h3>linux</h3>
+    <ul>
+    <!-- https://www.kernel.org/feeds/all.atom.xml -->
+    <li><a href='/newspage/kernel'>linux kernel</a></li>
+    <li><a href='/newspage/slackware'>slackware linux</a></li>
+    <!--
+    https://mirrors.slackware.com/feeds/slackware-current.rss
+    https://mirrors.slackware.com/feeds/slackware64-current.rss
+    changelog, mirror
+    -->
+    </ul>
+    <h3>nature</h3>
+    <ul>
+    <% for (var i = 0; i < list_nature.length;  i++ ) { %>
+    <li>
+    <a href='/newspage/nature/<%= list_nature[i] %>' ><%= plain_nature[i] %> </a>
+    </li>
+    <% } %>
+    </ul>
+
+    <h3>world</h3>
+    the world is so ugly! disable it for now.
+    <ul>
+    <li class="ui-state-disabled">BBC<!-- http://feeds.bbci.co.uk/news/world/rss.xml --></li>
+    <li class="ui-state-disabled">Al Jazeera<!-- https://www.aljazeera.com/xml/rss/all.xml --></li>
+    </ul>
+<h3>universe</h3>
+<ul>
+    <li><a href='/newspage/apod'>Astronomy Picture Of the Day</a></li>
+    <li><a href='/newspage/hubble'>Hubble</a></li>
+    <li><a href='/newspage/atel'>The Astronomer's Telegram</a></li>
+    <li><a href='/newspage/nasa'>From NASA</a></li>
+ webb,
+</ul>
+    <ul>
+    <li>biorX, viXra, earth observatory</li>
+
+
+<h3> other </h3>
+    <ul>
+    particle data group
+    protein data bank
+    </ul>
+
+
+    the journal of open source software:
+        https://joss.theoj.org/
+    </ul>
+    <h3>weather</h3>eumesat
+
+sun , moo, planets...
+
+    </div>
+<script>
+$(".news").addClass("noaction");
+$( () => { footerbox.lastUpdate();});
+</script>
+<%- include('footer'); -%>
