@@ -4,17 +4,18 @@
 <%- include('banner'); -%>
 
 <% for(var i=0; i < data.length; i++) { %>
-<div id="wiki_<%= i %>" style="display:none;">
-<h2 style="text-align:center;"><%- data[i].name %></h2>
-<br>
-<%- data[i].content %>
-</div>
+	<div id="wiki_<%= i %>" style="display:none;">
+	<h2  id="wiki_name_<%= i %>" style="text-align:center;"><%- data[i].name %></h2>
+	<div id="wiki_content_<%= i %>">
+	<%- data[i].content %>
+	</div>
+	</div>
 <% } %>
 
 <div id="maindisplay">
-    <div id="next" class="action" style="float:right;">&nbsp; &gt; &nbsp;</div>
-    <div id="previous" class="action" style="float:right;">&nbsp; &lt; &nbsp; </div>
-    <div id="wikiDisplay"></div>
+    <div id="next" class="action" style="float:right;">&nbsp;&gt;&nbsp;</div>
+    <div id="previous" class="action" style="float:right;">&nbsp;&lt;&nbsp;</div>
+    <div id="wikiDisplay"></div><div id="edit"></div>
     <hr>
     <a href="/wiki/create">create</a>
 </div>
@@ -24,18 +25,30 @@ https://fr.wikipedia.org/wiki/Charles_Baudelaire#/media/Fichier:Le_port_manuscri
 <script>
 $(document).ready(function() {
     let l = <%= data.length %>, p = 0;
+    let form = edit_form(p);
+    $("#edit").html(form);
     $("#wikiDisplay").html($("#wiki_"+p).html());
-    $("#previous").click( (event) => {
+    $("#previous").click( () => {
         p--;
-	if (p < 0) p = l-1;
-	$("#wikiDisplay").html($("#wiki_"+p).html());
+		if (p < 0) p = l-1;
+		$("#wikiDisplay").html($("#wiki_"+p).html());
+		form = edit_form(p);
+		$("#edit").html(form);
     });
-    $("#next").click( (event) => {
+    $("#next").click( () => {
         ++p;
-	if ( p >= l) p = 0;
-	$("#wikiDisplay").html($("#wiki_"+p).html());
+		if ( p >= l) p = 0;
+		$("#wikiDisplay").html($("#wiki_"+p).html());
+		form = edit_form(p);
+		$("#edit").html(form);
     });
-    $("<a href='/wiki/edit'>edit wiki</a>").insertAfter("#wikiDisplay");
+    function edit_form(p) {
+        let f = '<form name="edit" action="/wiki/edit" method="post">'+
+		'<input type="hidden" name="num" value="'+p+'" />'+
+		'<input value="edit" type="submit">'+
+		'</form>';
+		return f;
+    }
 });
 </script>
 <script>

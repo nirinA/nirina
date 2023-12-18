@@ -1,16 +1,45 @@
 <%- include('head', {title: 'edit wiki'}); -%>
+
+<%#
+<script src="https://cdn.tiny.cloud/1/wcxniju75nu1m3mo4vptrzocf7qruc8omcdxaamzgfk44h0x/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
+#%>
+
+<script src="/javascripts/tinymce/js/tinymce/tinymce.min.js"></script>
+
 <%- include('header'); -%>
 <!--
 <%- include('homebanner'); -%>
 -->
 <%- include('banner'); -%>
     <div id="maindisplay">
-only registered user can edit wiki
-<hr>
-<a href="/wiki/create">create</a>
-<div id="nwiki"></div>
-</div>
+    wiki num = <%- num %>
+	<form name="post_edit_wiki" action="/wiki/put_wiki" method="post">
+	wiki name : <%- data.name %> <input type="hidden" name="wikiname" value="<%- data.name %>"/>
+	<div>  <textarea name="content">
+	<%- data.content %>
+	</textarea></div>
+	<input class="ui-state-disabled" type="submit" />
+	<input type="button" onclick="location.href='/wiki'" value="Cancel"/>
+	</form>
 
+    <hr>
+    <a href="/wiki/create">create</a>
+    <div id="nwiki"></div>
+    </div>
+      <script>
+    tinymce.init({
+      selector: 'textarea',
+      plugins: 'advlist link image media lists save',
+      toolbar: 'undo redo save | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | align lineheight | tinycomments | checklist numlist bullist indent outdent | emoticons charmap | removeformat',
+      tinycomments_mode: 'embedded',
+      tinycomments_author: 'Author name',
+      mergetags_list: [
+        { value: 'First.Name', title: 'First Name' },
+        { value: 'Email', title: 'Email' },
+      ],
+      ai_request: (request, respondWith) => respondWith.string(() => Promise.reject("See docs to implement AI Assistant")),
+    });
+  </script>
 <script>
 //$(".wiki").addClass("noaction");
 $( () => { footerbox.lastUpdate();});

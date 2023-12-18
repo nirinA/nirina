@@ -27,20 +27,19 @@
        	   		   "Biomedical Engineering", "Energy", "Nanotechnology",
 			   "Machine Intelligence", "Biotechnology",
 			   "Methods", "Ecology and Evolution",
-			   "Microbiology", "Genetics"] %>
+			   "Microbiology", "Genetics", "Chemical Biology",
+			   "Electronics", "Microsystems &amp; Nanoengineering",
+			   "Photonics"] %>
     <% for (var i = 0; i < list_arXiv.length;  i++ ) { %>
     <li>
     <a href='/newspage/arxiv/<%= list_arXiv[i] %>' ><%= plain_arXiv[i] %> </a>
     </li>
     <% } %>
     </ul>
-    <h3>phys.org</h3>
+    <h3>physics</h3>
     <ul>
     <li><a href='/newspage/physorg'>phys.org</a></li>
-    </ul>
-    <h3>physics world</h3>
-    <ul>
-    <li><a href=/newspage/physicsworld>physicsworld</a></li>
+    <li><a href=/newspage/physicsworld>physics world</a></li>
     </ul>
 
     <h3>linux</h3>
@@ -62,13 +61,38 @@
     </li>
     <% } %>
     </ul>
-
+    <h3>bioRxiv</h3>
+    <ul>
+    <li><a href='/newspage/biorxiv'>bioRxiv</a>
+    </li>
+    </ul>
+    <h3>PLOS ONE</h3>
+    <ul>
+    <li><a href='/newspage/plos'>plos one</a></li>
+    </ul>
     <h3>world</h3>
     the world is so ugly! disable it for now.
     <ul>
     <li class="ui-state-disabled">BBC<!-- http://feeds.bbci.co.uk/news/world/rss.xml --></li>
     <li class="ui-state-disabled">Al Jazeera<!-- https://www.aljazeera.com/xml/rss/all.xml --></li>
     </ul>
+<h3>earth</h3>
+<ul>
+    <li><a href='/newspage/earthobservatory'>earth observatory</a></li>
+    <li><a href='/newspage/eumesat'>weather</a></li>
+</ul>
+<h3>sun</h3>
+    <ul>
+    <li>soho</li>
+<!--
+https://soho.nascom.nasa.gov/data/realtime/mpeg/
+    https://suntoday.lmsal.com/suntoday/?suntoday_date=2023-11-17
+https://iris.lmsal.com/iristoday/?iristoday_date=2023-11-17
+
+
+sun , moo, planets...
+-->
+</ul>
 <h3>universe</h3>
 <ul>
     <li><a href='/newspage/apod'>Astronomy Picture Of the Day</a></li>
@@ -77,23 +101,15 @@
     <li><a href='/newspage/nasa'>From NASA</a></li>
  webb,
 </ul>
+<h3> other on the web</h3>
     <ul>
-    <li>biorX, viXra, earth observatory</li>
-
-
-<h3> other </h3>
-    <ul>
-    particle data group
-    protein data bank
+    <li><a href="https://plus.nasa.gov/series/space-out/">Space Out</a></li>
+    <li><a href="https://vixra.org/">viXra</a></li>
+    <li><a href="https://pdg.lbl.gov/">particle data group</a></li>
+    <li><a href="https://www.wwpdb.org">protein data bank</a></li>
+    <li><a href="https://joss.theoj.org/">the journal of open source software</a></li>
     </ul>
-
-
-    the journal of open source software:
-        https://joss.theoj.org/
-    </ul>
-    <h3>weather</h3>eumesat
-
-sun , moo, planets...
+    
 
     </div>
 <script>

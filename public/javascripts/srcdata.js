@@ -14,6 +14,9 @@ img.attr( {
   height:16
 } );
 img.appendTo($('#logo'));
+img.click( () => {
+    location.href="https://nirina.raseliarison.mg/antisocial";
+});
 
 /* only w, h have changed */
 
@@ -28,13 +31,13 @@ nimg.attr( {
 } );
 nimg.appendTo($('#niimg'));
 
-var img = $('<img />');
-img.attr( {
-    id: 'qimg',
+var fimg = $('<img />');
+fimg.attr( {
+    id: 'fimg',
     src: imgdata.fm,
     alt: 'faucille et marteau',
     oncontextmenu: 'return false;',
     width: 450,
     //css: { "z-index": "-3"}
 } );
-img.appendTo($('.blackCatContainer'));
+fimg.appendTo($('.blackCatContainer'));

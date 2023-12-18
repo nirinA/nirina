@@ -9,15 +9,15 @@ let items = [];
 let wikifile = join(__dirname,'..', 'public', 'wiki', 'wikicontent.json');
 fs.readFile(wikifile, async (err, buffer) => {
     if (err) {
-	console.log('no wiki file, creating the folder');
-	try {
-	    const wikiFolder = join(__dirname,'..', 'public', 'wiki');
-	    const createDir = await mkdir(wikiFolder, { recursive: true });
-	    console.log(`created ${createDir}`);
-	    touch(wikifile);
-	} catch (err) {
-	    console.error(err.message);
-	}
+		console.log('no wiki file, creating the folder');
+		try {
+		    const wikiFolder = join(__dirname,'..', 'public', 'wiki');
+		    const createDir = await mkdir(wikiFolder, { recursive: true });
+		    console.log(`created ${createDir}`);
+		    touch(wikifile);
+		} catch (err) {
+		    console.error(err.message);
+		}
     } else {
 	//console.log(buffer.toString());
 	items = JSON.parse(buffer.toString())['items'];
@@ -30,8 +30,9 @@ router.get('/', (req, res, next) => {
 });
 
 /* edit wiki page */
-router.get('/edit', (req, res, next) => {
-    res.render('edit_wiki', {data: items});
+router.post('/edit', (req, res, next) => {
+    var num = req.body.num;
+    res.render('edit_wiki', {num: num, data: items[num]});
 });
 
 /* create wiki page. */
@@ -53,7 +54,6 @@ router.post('/put_wiki', async (req, res, next) => {
     var item = {'name': name, 'content': content};
     items.push(item);
     await appendFile(
-	//join(`public/wiki/wikicontent.json`),
 	wikifile,
         JSON.stringify({items}),
             {

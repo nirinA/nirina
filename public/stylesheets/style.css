@@ -79,6 +79,7 @@ a:hover {
 }
 #logo {
     float: right;
+    cursor: pointer;
 }
 #maindisplay {
     /*border-style: solid;*/

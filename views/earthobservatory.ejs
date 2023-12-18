@@ -1,0 +1,35 @@
+<%- include('head', {title: 'eo'}); -%>
+<%- include('header'); -%>
+<%- include('homebanner'); -%>
+<%- include('banner'); -%>
+    <div id="maindisplay">
+    <h1><%= data.title %></h1>
+<% for(var i=0; i < data.items.length; i++) { %>
+   <div id="eo-content<%= i %>">
+   <h2><%- data.items[i].title %></h2>
+   <%- data.items[i]["content:encoded"] %>
+   </div>
+<% } %>
+    </div>
+<script>
+$(document).ready(function() {
+    for(let i = 0; i < <%= data.items.length %>; i++) {
+        $("<div></div>")
+	    .addClass("eo"+i)
+	    .appendTo("#maindisplay")
+	    .html($("#eo-item"+i).html());
+	$("button.bi"+i).click( () => {
+	    $(".eo"+i).html($("#eo-content"+i).html());
+	});
+	$("button.ci"+i).click( () => {
+	    $(".eo"+i).html($("#eo-item"+i).html());
+	});
+	
+    }
+});
+</script>
+<script>
+    //$(".news").addClass("noaction");
+    $( () => { footerbox.lastUpdate();});
+</script>
+<%- include('footer'); -%>

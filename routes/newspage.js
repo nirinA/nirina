@@ -22,7 +22,8 @@ let arXiv = ["astro-ph","cond-mat","cs","eess","gr-qc","hep-ex",
 
 let nature = ["natcomputsci", "natastron", "natbiomedeng",
 	       "nenergy", "nnano", "natmachintell", "nbt",
-	       "nmeth", "natecolevol", "nmicrobiol", "ng"
+	      "nmeth", "natecolevol", "nmicrobiol", "ng",
+	      "nchembio", "natelectron", "micronano", "nphoton"
 	      ];
 
 router.get("/", (req, res) => {
@@ -120,13 +121,48 @@ router.get("/atel", async (req, res, next) => {
 router.get("/nasa", async (req, res, next) => {
     try {
 	let feed = await parser.parseURL("https://www.nasa.gov/feed/");
-	//let rss = await pfs.readFile(path.join(__dirname,'nasa-news-feed.rss'), "utf-8");
-	//let feed = await parser.parseString(rss);
 	res.render("nasa", {data: feed});
+	} catch (err) {
+            next(err);
+	}
+});
+
+router.get("/biorxiv", async (req, res, next) => {
+    try {
+	let feed = await parser.parseURL("http://connect.biorxiv.org/biorxiv_xml.php?subject=all");
+	res.render("biorxiv", {data: feed});
+	} catch (err) {
+            next(err);
+	}
+});
+
+router.get("/earthobservatory", async (req, res, next) => {
+    try {
+	let feed = await parser.parseURL("https://earthobservatory.nasa.gov/feeds/earth-observatory.rss");
+	res.render("earthobservatory", {data: feed});
+	} catch (err) {
+            next(err);
+	}
+});
+
+router.get("/plos", async (req, res, next) => {
+    try {
+	//let feed = await parser.parseURL("");
+	let rss = await pfs.readFile(path.join(__dirname,'plosone_atom.rss'), "utf-8");
+	let feed = await parser.parseString(rss);
+	res.render("plos", {data: feed});
 	//res.send(feed);
 	} catch (err) {
             next(err);
 	}
+});
+
+router.get("/eumesat", async (req, res, next) => {
+    try {
+	res.render("eumesat");
+    } catch (err) {
+	next(err);
+    }
 });
 
 /*

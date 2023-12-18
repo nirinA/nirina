@@ -17,9 +17,13 @@
     <% } %>
     </ul>
     </li>
-  <li><div><a href='/newspage/physorg'>phys.org</a></div></li>
-  <li><div><a href='/newspage/physicsworld'>physics world</a></div></li>
-  <li><div>linux</div>
+    <li><div>physics</div>
+    <ul>
+      <li><div><a href='/newspage/physorg'>phys.org</a></div></li>
+      <li><div><a href='/newspage/physicsworld'>physics world</a></div></li>
+    </ul>
+    </li>
+     <li><div>linux</div>
 	<ul>
   	<li><div><a href='/newspage/kernel'>kernel</a></div></li>
 	<li><div><a href='/newspage/slackware'>slackware</a></div></li>
@@ -29,15 +33,24 @@
     <ul>
     <% var list_nature = ["natcomputsci", "natastron", "natbiomedeng",
 	       "nenergy", "nnano", "natmachintell", "nbt",
-	       "nmeth", "natecolevol", "nmicrobiol", "ng"] %>
+	       "nmeth", "natecolevol", "nmicrobiol", "ng",
+	       "nchembio", "natelectron", "micronano", "nphoton"] %>
     <% for (var i = 0; i < list_nature.length;  i++ ) { %>
     <li><div><a href='/newspage/nature/<%= list_nature[i] %>' > <%= list_nature[i] %> </a></div></li>
     <% } %>
     </ul>
+  <li><div><a href='/newspage/biorxiv'>bioRxiv</a></div></li>
+  <li><div><a href='/newspage/plos'>plos one</a></div></li>
   <li><div>world</div>
     <ul>
       <li class="ui-state-disabled"><div>BBC</div></li>
       <li class="ui-state-disabled"><div>Al Jazeera</div </li>
+    </ul>
+  </li>
+  <li><div>earth</div>
+    <ul>
+      <li><div><a href='/newspage/earthobservatory'>earth observatory</a></div></li>
+      <li><div><a href='/newspage/eumesat'>weather</a></div></li>
     </ul>
   </li>
   <li><div>universe</div>
@@ -54,7 +67,7 @@
         <li>
         <span title="wiki page" class="wiki">&nbsp;wiki&nbsp;</span>&nbsp;
      	</li>        
-
-    <li><span title="login" class="login">&nbsp;login&nbsp;</span></li>
+	<!-- <li><span title="antisocial" class="antisocial">&nbsp;antisocial&nbsp;</span></li> -->
+    	<li><span title="login" class="login">&nbsp;login&nbsp;</span></li>
     </ul>
 </div>
