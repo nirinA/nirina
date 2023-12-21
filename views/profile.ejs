@@ -1,0 +1,46 @@
+<!doctype html>
+    <html>
+    <head>
+        <title>Node Authentication</title>
+        <style>
+            body        { padding-top:80px; word-wrap:break-word; }
+        </style>
+    </head>
+    <body>
+    <div class="container">
+<nav class="nav">
+				<ul>
+					<li class="user"><%= user.username %></li>
+					<li>
+						<form action="/logout" method="post">
+							<button class="logout" type="submit">Sign out</button>
+							<input type="hidden" name="_csrf" value="<%= csrfToken %>">
+						</form>
+					</li>
+				</ul>
+			</nav>
+        <div class="page-header text-center">
+            <h1><span class="fa fa-anchor"></span> Profile Page</h1>
+            
+        </div>
+
+        <div class="row">
+
+            <!-- LOCAL INFORMATION -->
+            <div class="col-sm-6">
+                <div class="well">
+                    <h3><span class="fa fa-user"></span> Local</h3>
+
+                        <p>
+                            <strong>name</strong>: <%= user.username %><br>
+                             <strong>password</strong>: <%= user.password %>
+                        </p>
+
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+    </body>
+    </html>

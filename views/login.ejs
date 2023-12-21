@@ -5,7 +5,20 @@
 
 <div id="maindisplay">
 <h1><%= title %></h1>
-login / register are temporarily unavailable
+<!-- login / register are temporarily unavailable -->
+       <!-- show any messages that come back with authentication -->
+        <% if (message.length > 0) { %>
+      <div class="error" style="background-color: red;"><%= message %></div>
+      <% } %>
+      <br />
+   <form action="/login/password" method="post">   
+      <label for="username">Username</label><br />
+      <input type="text" name="username" required /><br />
+      <label for="password">Password</label><br />
+      <input type="password" name="password" required /><br />
+      <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+      <input type="submit" value="login" /><br />
+    </form>
 </div>
 <script>
 $( () => {

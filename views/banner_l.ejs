@@ -68,7 +68,27 @@
         <span title="wiki page" class="wiki">&nbsp;wiki&nbsp;</span>&nbsp;
      	</li>        
 	<!-- <li><span title="antisocial" class="antisocial">&nbsp;antisocial&nbsp;</span></li> -->
+<% if(user) { %>
+        <li>
+        <span title="mirindra page" class="mirindra">&nbsp;mirindra&nbsp;</span>&nbsp;
+     	</li>        
 
-    	<li><span title="login" class="login">&nbsp;login&nbsp;</span></li>
+        <li>
+        <span title="ni page" class="nirinA"><a href='/ni'>&nbsp;nirinA&nbsp;</a></span>&nbsp;
+     	</li>
+<script>
+//$(".nirinA").click(() => { location.href=links.get("/ni"); });
+</script>
+<% } %>
+
+<li><span class="logout">
+<form action="/logout" method="post">
+      <button type="submit">&nbsp;Logout&nbsp;</button>
+      <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+</form></span>
+</li>
+<li><span class="user noaction">&nbsp;<%= user.username %>&nbsp;</span>
+</li>
+
 </ul>
 </div>

@@ -1,14 +1,20 @@
-const express = require('express')
+var express = require('express')
 const bodyParser = require('body-parser')
 const createError = require('http-errors');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var path = require('path');
-const rfs = require("rotating-file-stream");
+var rfs = require("rotating-file-stream");
+
+var session = require('express-session');
+var csrf = require('csurf');
+var passport = require('passport');
+
+var SQLiteStore = require('connect-sqlite3')(session);
 
 var app = express()
 const port = process.env.PORT || 3000
-app.enable("trust proxy");
+//app.enable("trust proxy");
 const accessLogStream = rfs.createStream("file.log", {
   size: "1M", // rotate every 1 MegaBytes written
   interval: "1d", // rotate daily
@@ -16,7 +22,7 @@ const accessLogStream = rfs.createStream("file.log", {
   path: path.join(__dirname, 'log')
 });
 
-app.use(bodyParser.urlencoded({ extended: true }))
+app.use(bodyParser.urlencoded({ extended: false }))
 
 var indexRouter = require('./routes/index');
 var newspageRouter = require('./routes/newspage');
@@ -33,9 +39,48 @@ var loginRouter = require('./routes/login');
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
+app.locals.pluralize = require('pluralize');
+
 app.use(express.static(__dirname + '/public'));
 
 app.use(logger("combined", { stream: accessLogStream }));
+
+//require('./config/passport')(passport); // pass passport for configuration
+//app.use(pass);
+
+// passport session
+//app.set('trust proxy', 1) // trust first proxy
+app.use(session({ secret: 'ilovescotchscotchyscotchscotch',  // session secret
+		  resave: false,
+		  saveUninitialized: false, //true,
+		  store: new SQLiteStore({ db: 'sessions.db', dir: './var/db' })
+		}));
+
+app.use(csrf());
+app.use(passport.authenticate('session'));
+
+app.use(function(req, res, next) {
+  var msgs = req.session.messages || [];
+  res.locals.messages = msgs;
+  res.locals.hasMessages = !! msgs.length;
+  req.session.messages = [];
+  next();
+});
+
+
+app.use(function(req, res, next) {
+  res.locals.csrfToken = req.csrfToken();
+  next();
+});
+
+
+/*
+app.use(passport.initialize());
+app.use(passport.session()); // persistent login sessions
+app.use(flash()); // use connect-flash for flash messages stored in session
+*/
+
+//require('./routes/login.js')(app, passport);
 
 app.use('/', indexRouter);
 app.use('/newspage', newspageRouter);
@@ -46,7 +91,7 @@ app.use('/users', usersRouter);
 
 app.use('/artisans', artisansRouter);
 */
-app.use('/login', loginRouter);
+app.use('/', loginRouter);
 
 //app.use('/put_wiki', put_wikiRouter);
 
