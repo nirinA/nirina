@@ -19,6 +19,7 @@
 	<%- data.content %>
 	</textarea></div>
 	<input class="ui-state-disabled" type="submit" />
+	<input type="hidden" name="_csrf" value="<%= csrfToken %>">
 	<input type="button" onclick="location.href='/wiki'" value="Cancel"/>
 	</form>
 

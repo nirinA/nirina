@@ -26,7 +26,11 @@ fs.readFile(wikifile, async (err, buffer) => {
 
 /* GET wiki page. */
 router.get('/', (req, res, next) => {
-    res.render('wiki', {data: items});
+    var user = null;
+    if (req.user) {
+	user = req.user;
+    }
+    res.render('wiki', {data: items, user: user});
 });
 
 /* edit wiki page */

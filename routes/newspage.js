@@ -9,7 +9,7 @@ var parser = new Parser({
       Accept: 'application/rss+xml, application/xml, application/atom+xml',
   },
 });
-//const json2html = require("node-json2html");
+
 const { parse } = require('rss-to-json');
 
 const util = require("util");
@@ -27,25 +27,37 @@ let nature = ["natcomputsci", "natastron", "natbiomedeng",
 	      ];
 
 router.get("/", (req, res) => {
+    var user = null;
+    if (req.user) {
+	user = req.user;
+    }
     res.render("newspage", {list_arXiv: arXiv,
-			    list_nature: nature});
+			    list_nature: nature,
+			    user: user});
 });
 
 router.get("/physorg", async (req, res, next) => {
+    var user = null;
+    if (req.user) {
+	user = req.user;
+    }
     try {
 	let feed = await parser.parseURL("https://phys.org/rss-feed");
-	res.render("physorg", {data: feed});
+	res.render("physorg", {data: feed, user: user});
     } catch(err) {
 	next(err);
     }
 });
 
 for (let a of nature) {
-    //console.log("https://www.nature.com/"+a+".rss")
     router.get("/nature/"+a, async (req, res, next) => {
+	var user = null;
+	if (req.user) {
+	    user = req.user;
+	}
 	try {
 	    let feed = await parser.parseURL("https://www.nature.com/"+a+".rss");
-	    res.render("nature", {data:feed});
+	    res.render("nature", {data:feed, user: user});
 	} catch (err) {
             next(err);
 	}
@@ -54,10 +66,11 @@ for (let a of nature) {
 
 for (let a of arXiv) {
     router.get("/arxiv/"+a, async (req, res, next) => {
+	var user = null;
+	if (req.user) {
+	    user = req.user;
+	}
 	try {
-	    if (req.user) {
-		console.log('user logged: '+ req.user.username);
-	    }
 	    let feed = await parser.parseURL("https://export.arxiv.org/rss/"+a);
 	    res.render("arxiv", {data: feed});
 	} catch (err) {
@@ -67,45 +80,65 @@ for (let a of arXiv) {
 }
 
 router.get("/apod", async (req, res, next) => {
+    var user = null;
+    if (req.user) {
+	user = req.user;
+    }
     try {
 	let feed = await parser.parseURL("https://apod.nasa.gov/apod.rss");
-	res.render("apod", {data: feed});
+	res.render("apod", {data: feed, user: user});
 	} catch (err) {
             next(err);
 	}
 });
 
 router.get("/physicsworld", async (req, res, next) => {
+    var user = null;
+    if (req.user) {
+	user = req.user;
+    }
     try {
 	let feed = await parser.parseURL("https://physicsworld.com/feed/");
-	res.render("physicsworld", {data: feed});
+	res.render("physicsworld", {data: feed, user: user});
 	} catch (err) {
             next(err);
 	}
 });
 
 router.get("/kernel", async (req, res, next) => {
+    var user = null;
+    if (req.user) {
+	user = req.user;
+    }
     try {
 	let feed = await parser.parseURL("https://www.kernel.org/feeds/kdist.xml");
-	res.render("kernel", {data: feed});
+	res.render("kernel", {data: feed, user: user});
 	} catch (err) {
             next(err);
 	}
 });
 
 router.get("/hubble", async (req, res, next) => {
+    var user = null;
+    if (req.user) {
+	user = req.user;
+    }
     try {
 	let feed = await parser.parseURL("http://feeds.feedburner.com/hubble_potw/");
-	res.render("hubble", {data: feed});
+	res.render("hubble", {data: feed, user: user});
 	} catch (err) {
             next(err);
 	}
 });
 
 router.get("/slackware", async (req, res, next) => {
+    var user = null;
+    if (req.user) {
+	user = req.user;
+    }
     try {
 	let feed = await parser.parseURL("https://mirrors.slackware.com/feeds/slackware64-current.rss");
-	res.render("slackware", {data: feed});
+	res.render("slackware", {data: feed, user: user});
 	//res.send(feed);
 	} catch (err) {
             next(err);
@@ -113,47 +146,67 @@ router.get("/slackware", async (req, res, next) => {
 });
 
 router.get("/atel", async (req, res, next) => {
+    var user = null;
+    if (req.user) {
+	user = req.user;
+    }
     try {
 	let feed = await parser.parseURL("https://www.astronomerstelegram.org/?rss");
-	res.render("atel", {data: feed});
+	res.render("atel", {data: feed, user: user});
 	} catch (err) {
             next(err);
 	}
 });
 
 router.get("/nasa", async (req, res, next) => {
+    var user = null;
+    if (req.user) {
+	user = req.user;
+    }
     try {
 	let feed = await parser.parseURL("https://www.nasa.gov/feed/");
-	res.render("nasa", {data: feed});
+	res.render("nasa", {data: feed, user: user});
 	} catch (err) {
             next(err);
 	}
 });
 
 router.get("/biorxiv", async (req, res, next) => {
+    var user = null;
+    if (req.user) {
+	user = req.user;
+    }
     try {
 	let feed = await parser.parseURL("http://connect.biorxiv.org/biorxiv_xml.php?subject=all");
-	res.render("biorxiv", {data: feed});
+	res.render("biorxiv", {data: feed, user: user});
 	} catch (err) {
             next(err);
 	}
 });
 
 router.get("/earthobservatory", async (req, res, next) => {
+    var user = null;
+    if (req.user) {
+	user = req.user;
+    }
     try {
 	let feed = await parser.parseURL("https://earthobservatory.nasa.gov/feeds/earth-observatory.rss");
-	res.render("earthobservatory", {data: feed});
+	res.render("earthobservatory", {data: feed, user: user});
 	} catch (err) {
             next(err);
 	}
 });
 
 router.get("/plos", async (req, res, next) => {
+    var user = null;
+    if (req.user) {
+	user = req.user;
+    }
     try {
 	//let feed = await parser.parseURL("");
 	let rss = await pfs.readFile(path.join(__dirname,'plosone_atom.rss'), "utf-8");
 	let feed = await parser.parseString(rss);
-	res.render("plos", {data: feed});
+	res.render("plos", {data: feed, user: user});
 	//res.send(feed);
 	} catch (err) {
             next(err);
@@ -161,8 +214,12 @@ router.get("/plos", async (req, res, next) => {
 });
 
 router.get("/eumesat", async (req, res, next) => {
+    var user = null;
+    if (req.user) {
+	user = req.user;
+    }
     try {
-	res.render("eumesat");
+	res.render("eumesat", {user: user});
     } catch (err) {
 	next(err);
     }

@@ -5,7 +5,6 @@
 
 <div id="maindisplay">
 <h1><%= title %></h1>
-<!-- login / register are temporarily unavailable -->
        <!-- show any messages that come back with authentication -->
         <% if (message.length > 0) { %>
       <div class="error" style="background-color: red;"><%= message %></div>
@@ -19,6 +18,11 @@
       <input type="hidden" name="_csrf" value="<%= csrfToken %>">
       <input type="submit" value="login" /><br />
     </form>
+    <div>
+    not an user? ask for an account; send request to: <br>
+n i r i n a  &#64 &#114 &#97 &#115 &#101 &#108 &#105 &#97 &#114 &#105 &#115 &#111 &#110 &#46 &#109 &#103
+<br>
+    </div>
 </div>
 <script>
 $( () => {

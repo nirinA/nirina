@@ -1,8 +1,11 @@
-<%- include('head', {title: 'apod'}); -%>
+<%- include('head', {title: 'nirinA'}); -%>
 <%- include('header'); -%>
 <%- include('homebanner'); -%>
 <%- include('banner'); -%>
 <% if (user) { %>
+    <% if (user.username === "mirindra") { %>
+    <li><span title="mirindra" class="mirindra noaction" >&nbsp;mirindra&nbsp;</span></li>
+    <% } %>
 <li><span class="logout logoutsvg">
 <form action="/logout" method="post">
       <button type="submit">&nbsp;logout&nbsp;</button>
@@ -16,15 +19,5 @@
     	<li><span title="login" class="login">&nbsp;login&nbsp;</span></li>
 <% } %>
 <%- include('banner_end'); -%>
-    <div id="maindisplay">
-    <h1><%= data.title %></h1>
-    <h2><%= data.description %></h2>
-<% for(var i=0; i < data.items.length; i++) { %>
-   <div><%- data.items[i].content %></div>
-<% } %>
-    </div>
-<script>
-//$(".news").addClass("noaction");
-$( () => { footerbox.lastUpdate();});
-</script>
-<%- include('footer'); -%>
+<div id="maindisplay">
+<h1>Mirindra</h1>

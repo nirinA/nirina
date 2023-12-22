@@ -34,6 +34,7 @@ var usersRouter = require('./routes/users');
 var artisansRouter = require('./routes/artisans');
 */
 var loginRouter = require('./routes/login'); 
+var mirindraRouter = require('./routes/mirindra');
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -85,7 +86,7 @@ app.use(flash()); // use connect-flash for flash messages stored in session
 app.use('/', indexRouter);
 app.use('/newspage', newspageRouter);
 app.use('/wiki', wikiRouter);
-
+app.use('/mirindra', mirindraRouter);
 /*
 app.use('/users', usersRouter);
 

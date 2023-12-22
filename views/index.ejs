@@ -3,6 +3,12 @@
 <%- include('homebanner'); -%>
 <%- include('banner'); -%>
 <% if (user) { %>
+    <% if (user.username === "mirindra") { %>
+    <li><span title="mirindra" class="mirindra" >&nbsp;mirindra&nbsp;</span></li>
+<script>
+$(".mirindra").click(() => {location.href='/mirindra'});
+</script>
+    <% } %>
 <li><span class="logout logoutsvg">
 <form action="/logout" method="post">
       <button type="submit">&nbsp;logout&nbsp;</button>
