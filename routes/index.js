@@ -17,15 +17,27 @@ function callBack(req, res, next) {
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-    if (!req.user) {
-	res.render('index', { title: 'nirinA'});
+    if (req.user) {
+	res.render('index', { title: 'nirinA', user: req.user});
 	return
     }
     next();
-}, function(req, res, next) {
-    //res.locals.filter = null;
-    res.render('index_l', { title: 'nirinA',  user: req.user });
+} , function(req, res, next) {
+    res.render('index', { title: 'nirinA', user: null});
 });
+
+/*router.get('/', function(req, res, next) {
+    if (req.user) {
+	var user = req.user;
+	console.log('user: '+ user.username); 
+    } else {
+	var user = {};//db.get('SELECT * FROM users WHERE username = ?', ["dummy"]);
+	console.log('no user:');
+    }
+    console.log('user: '+ user.username + '; '+typeof(user));
+    res.render('index', { title: 'nirinA', user: user});
+});
+*/
 
 router.get('/ni', function(req, res, next) {
     if (req.user.username === "nirinA") {

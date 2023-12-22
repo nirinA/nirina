@@ -55,6 +55,9 @@ for (let a of nature) {
 for (let a of arXiv) {
     router.get("/arxiv/"+a, async (req, res, next) => {
 	try {
+	    if (req.user) {
+		console.log('user logged: '+ req.user.username);
+	    }
 	    let feed = await parser.parseURL("https://export.arxiv.org/rss/"+a);
 	    res.render("arxiv", {data: feed});
 	} catch (err) {

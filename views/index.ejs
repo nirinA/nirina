@@ -2,8 +2,22 @@
 <%- include('header'); -%>
 <%- include('homebanner'); -%>
 <%- include('banner'); -%>
+<% if (user) { %>
+<li><span class="logout logoutsvg">
+<form action="/logout" method="post">
+      <button type="submit">&nbsp;logout&nbsp;</button>
+      <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+</form>
+</span>
+</li>
+<li><span class="user noaction usersvg">&nbsp;<%= user.username %>&nbsp;</span>
+</li>
+<% } else { %>
+    	<li><span title="login" class="login">&nbsp;login&nbsp;</span></li>
+<% } %>
+<%- include('banner_end'); -%>
 
-     <h1 id=niimg>nirin</h1>
+<h1 id=niimg>nirin</h1>
 
 <div id="maindisplay">
 
