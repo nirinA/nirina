@@ -1,0 +1,23 @@
+<%- include('mirindra_head', {title: 'mirindra'}); -%>
+
+<h2>Mirindra 4 mois</h2>
+<h3><a href='/mirindra/05'>les premières photos</a></h3>
+<h3>les premières vidéos</h3>
+
+<% for (var i = 0; i < listVideos.length;  i++ ) { %>
+<div>
+<video controls>
+<source src='/images/mirindra/<%= listVideos[i] %>' type="video/webm"></source>
+</video>
+</div>
+<br>
+<% } %>
+    
+<%#
+<video controls>
+<source src='/images/mirindra/capture00009.webm' type="video/webm"></source>
+</video>
+#%>
+
+</div>
+<%- include('footer'); -%>

@@ -1,14 +1,15 @@
 <%- include('mirindra_head', {title: 'mirindra'}); -%>
 
-<h2>2009/08/13</h2>
+<h2>2009/09/28</h2>
 <h3><a href='/mirindra/05'>les premières photos</a></h3>
 <h3><a href='/mirindra/video0'>les premières vidéos</a></h3>
+<h3><a href='/mirindra/video1'>2009/08/13</a></h3>
 
     <% for (var i = 0; i < listImages.length;  i++ ) { %>
     <div class="imagedrop">
         <img src="/images/mirindra/<%= listImages[i] %>" width="50" heigth="50">
     	<div class="imagedrop-content">
-    	     <img src="/images/mirindra/20090813/<%= listImages[i] %>" width="250" heigth="250">
+    	     <img src="/images/mirindra/20090928/<%= listImages[i] %>" width="250" heigth="250">
     	</div>
     </div>
     <% } %>
@@ -17,7 +18,7 @@
 <% for (var i = 0; i < listVideos.length;  i++ ) { %>
 <div>
 <video controls>
-<source src='/images/mirindra/20090813/<%= listVideos[i] %>' type="video/webm"></source>
+<source src='/images/mirindra/20090928/<%= listVideos[i] %>' type="video/webm"></source>
 </video>
 </div>
 <br>
@@ -29,7 +30,6 @@
 </video>
 #%>
 
-<h3><a href='/mirindra/video2'>2009/09/28</a></h3>
 
 </div>
 <%- include('footer'); -%>

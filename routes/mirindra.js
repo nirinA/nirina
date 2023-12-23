@@ -29,9 +29,9 @@ router.get('/', function(req, res, next) {
     res.render('index', { title: 'nirinA', user: null});
 });
 
-router.get('/video1', function(req, res, next) {
+router.get('/video0', function(req, res, next) {
     if (req.user.username === "mirindra") {
-	res.render('mirindra_video1', { title: 'mirindra',
+	res.render('mirindra_video0', { title: 'mirindra',
 					listVideos: listVideos,
 					user: req.user });
 	return
@@ -46,6 +46,32 @@ router.get('/05', function(req, res, next) {
 	res.render('mirindra_05', { title: 'mirindra',
 				    listImages: listImages,
 				    user: req.user });
+	return
+    }
+    next();
+} , function(req, res, next) {
+    res.render('index', { title: 'nirinA', user: null});
+});
+
+router.get('/video1', function(req, res, next) {
+    if (req.user.username === "mirindra") {
+	res.render('mirindra_video1', { title: 'mirindra',
+					listImages: listImages1,
+					listVideos: listVideos1,
+					user: req.user });
+	return
+    }
+    next();
+} , function(req, res, next) {
+    res.render('index', { title: 'nirinA', user: null});
+});
+
+router.get('/video2', function(req, res, next) {
+    if (req.user.username === "mirindra") {
+	res.render('mirindra_video2', { title: 'mirindra',
+					listImages: listImages2,
+					listVideos: listVideos2,
+					user: req.user });
 	return
     }
     next();
