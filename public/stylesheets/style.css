@@ -78,6 +78,12 @@ a:hover {
     color: #00ff00;
 }
 #logo {
+    margin-leftright: 5px;
+    float: right;
+    cursor: pointer;
+}
+#firebase {
+    margin-right: 5px;
     float: right;
     cursor: pointer;
 }

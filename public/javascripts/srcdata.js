@@ -7,8 +7,8 @@ var imgdata = {
 var img = $('<img />');
 img.attr( { 
   id: 'logoimg',
-  src: imgdata.A,
-  alt: 'base64',
+    src: '/images/A.png', //imgdata.A,
+  alt: 'A',
   oncontextmenu: 'return false;',
   width:16,
   height:16
@@ -24,7 +24,7 @@ var nimg = $('<img />');
 nimg.attr( { 
   id: 'Aimg',
   src: imgdata.A,
-  alt: 'base64',
+  alt: 'A',
   oncontextmenu: 'return false;',
   width:25,
   height:25
@@ -41,3 +41,17 @@ fimg.attr( {
     //css: { "z-index": "-3"}
 } );
 fimg.appendTo($('.blackCatContainer'));
+
+var firebaseimg = $('<img />');
+firebaseimg.attr( { 
+  id: 'firebaseImg',
+  src: '/images/video-call.png',
+  alt: 'video call',
+  oncontextmenu: 'return false;',
+  width:16,
+  height:16
+} );
+firebaseimg.appendTo($('#firebase'));
+firebaseimg.click( () => {
+    location.href="https://fir-rtc-cbf16.web.app";
+});
