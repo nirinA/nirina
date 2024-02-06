@@ -55,7 +55,7 @@ router.post('/logout', function(req, res, next) {
     res.redirect('/');
   });
 });
-
+//------------------------------//
 // we will want this protected so you have to be logged in to visit
 // we will use route middleware to verify this (the isLoggedIn function)
 router.get('/profile', isLoggedIn, function(req, res) {
@@ -73,7 +73,7 @@ function isLoggedIn(req, res, next) {
     // if they aren't redirect them to the home page
         res.redirect('/login');
 }
-
+//-------------------------------//
 
 module.exports = router;
 

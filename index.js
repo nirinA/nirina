@@ -42,8 +42,6 @@ app.set('view engine', 'ejs');
 
 app.locals.pluralize = require('pluralize');
 
-app.use(express.static(__dirname + '/public'));
-
 app.use(logger("combined", { stream: accessLogStream }));
 
 //require('./config/passport')(passport); // pass passport for configuration
@@ -83,6 +81,20 @@ app.use(flash()); // use connect-flash for flash messages stored in session
 
 //require('./routes/login.js')(app, passport);
 
+// route middleware to make sure a user is logged in
+function isLoggedIn(req, res, next) {
+    // if user is authenticated in the session, carry on
+    if (req.isAuthenticated()) {
+	console.log('user logged'+req.user.username);
+	return next();
+    }
+    // if they aren't redirect them to the home page
+    res.redirect('/login');
+}
+
+app.use( '/images/mirindra', isLoggedIn, express.static( path.join( __dirname, '/public/images/mirindra' ) ) );
+app.use(express.static(__dirname + '/public'));
+
 app.use('/', indexRouter);
 app.use('/newspage', newspageRouter);
 app.use('/wiki', wikiRouter);
@@ -117,6 +129,7 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
+
 
 module.exports = app;
 //app.listen(3000, '0.0.0.0');
