@@ -3,6 +3,7 @@ var bannerLinks = new Map([
     ["news", "/newspage"],
     ["wiki", "/wiki"],
     //["antisocial", "https://nirina.raseliarison.mg/ossn"],
+    ["gemini", "/gemini"],
     ["login", "/login"],
 ])
 

@@ -1,0 +1,89 @@
+<html>
+  <body>
+    <style>
+      p {
+	  background-color: #aff0fa;
+	  color: blue;
+	  font-family: monospace;
+	  margin: 2px;
+	  padding: 5px;
+      }
+      #response {
+	  background-color: #faf1f2;
+	  margin: 2px;
+	  padding: 5px;
+	  font-family: Arial, sans-serif;
+      }
+      h3 {
+	  color: blue;
+      }
+	
+    </style>
+
+    <script type="importmap">
+      {
+        "imports": {
+          "@google/generative-ai": "https://esm.run/@google/generative-ai"
+        }
+      }
+    </script>
+    <script type="module">
+      import { GoogleGenerativeAI } from "@google/generative-ai";
+      const API_KEY = "AIzaSyBX_RZ3Ru-d20aXK7ZZfTZmJmicgph3K0Y";
+      const genAI = new GoogleGenerativeAI(API_KEY);
+      
+      var displayDiv = document.getElementById('geminiDisplay');
+      var clearButton = document.getElementById('clear');
+      clearButton.style.display = "none";
+      
+      async function run(prompt) {
+          const model = genAI.getGenerativeModel({ model: "gemini-pro"});
+          const result = await model.generateContent(prompt);
+          const response = await result.response;
+	  console.log(response);
+          const text = response.text();
+          display(prompt, text);
+      }
+
+      function clearDiv () {
+	  clearButton.style.display = "none";
+	  displayDiv.innerHTML = "";
+      }
+
+      function display(prompt, response) {
+	  let promptDiv = document.createElement('p');
+	  let responseDiv = document.createElement('div');
+	  responseDiv.id = "response";
+	  displayDiv.append(promptDiv);
+	  promptDiv.innerText = prompt;
+	  displayDiv.append(responseDiv);
+	  responseDiv.innerText = response;
+	  displayDiv.append(document.createElement('hr'));
+	  clearButton.style.display = "inline";
+      }
+	  
+      function fetch() {
+	  const prompt = document.querySelector("textarea").value;
+	  run(prompt);
+      }
+      document.querySelector('#run').addEventListener('click', fetch);
+      clearButton.addEventListener('click', clearDiv);
+
+    </script>
+    <h3> gemini for text-only input </h3>
+    <div>
+	  <label for="geminiPrompt">type your request:</label>
+	  <br/>
+	  <textarea id="geminiPrompt"
+		    name="geminiPrompt"
+		    placeholder="ask something ..."
+		    rows="5" cols="40">
+	  </textarea>
+	  <br/>
+	  <button id="run">run</button><button id="clear">clear</button>
+
+        <div id="geminiDisplay"></div>
+    </div>
+
+  </body>
+</html>

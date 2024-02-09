@@ -28,13 +28,13 @@ var indexRouter = require('./routes/index');
 var newspageRouter = require('./routes/newspage');
 var wikiRouter = require('./routes/wiki');
 //var put_wikiRouter = require('./routes/put_wiki');
-
 /*
 var usersRouter = require('./routes/users');
 var artisansRouter = require('./routes/artisans');
 */
 var loginRouter = require('./routes/login'); 
 var mirindraRouter = require('./routes/mirindra');
+var geminiRouter = require('./routes/gemini');
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -101,10 +101,10 @@ app.use('/wiki', wikiRouter);
 app.use('/mirindra', mirindraRouter);
 /*
 app.use('/users', usersRouter);
-
 app.use('/artisans', artisansRouter);
 */
 app.use('/', loginRouter);
+app.use('/gemini', geminiRouter);
 
 //app.use('/put_wiki', put_wikiRouter);
 

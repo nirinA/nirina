@@ -1,0 +1,77 @@
+<%- include('head', {title: 'gemini'}); -%>
+<%- include('header'); -%>
+<%- include('homebanner'); -%>
+<%- include('banner'); -%>
+<%- include('banner_end'); -%>
+<div id="maindisplay">
+<form>
+    <fieldset>
+        <legend>Select the gemini model to use:</legend>
+	<input id="modelText" class="styled" type="button" value="text" />&nbsp;&nbsp;<input id="modelMultimodal" class="styled" type="button" value="text+image" />&nbsp;&nbsp;<input id="modelChatbot" class="styled" type="button" value="chatbot" />&nbsp;&nbsp;&nbsp;&nbsp;<input id="modelHelp" class="styled" type="button" value="?" />
+    </fieldset>
+</form>
+<!--
+<h3>gemini text | gemini multimodal | gemini chat | how to</h3>
+<iframe width="600" height="420"  src="gemini_pro.html">
+</iframe>
+-->
+<div id="geminiFrame"></div>
+</div>
+<script>
+function setFrameModel ( event ) {
+        for (let b of event.data.activeInput) {
+            $(b).removeAttr('style');
+	    $(b).prop('disabled', false);
+        }
+	$(event.data.inputId).prop('disabled', true);
+        $(event.data.inputId).css({"background-color":"rgb(220 220 220 / 100%)",
+	                     "color":"#555",
+			     "cursor":"none"});
+	
+        $('#geminiFrame').html("");
+        $('<iframe>', {
+	    width: 600,
+	    height: 420,
+	    src: event.data.srcFrame}).appendTo("#geminiFrame");
+}
+
+
+$("#modelText").css({"background-color":"rgb(220 220 220 / 100%)",
+                         "color":"#555",
+			 "cursor":"none"});
+    $('#geminiFrame').html("");
+    $('<iframe>', {
+       width: 600,
+       height: 420,
+       src: 'gemini_pro.html'
+    }).appendTo("#geminiFrame"); 
+
+$("#modelText").on('click', {
+    inputId: "#modelText",
+    srcFrame: 'gemini_pro.html',
+    activeInput: ["#modelMultimodal", "#modelChatbot", "#modelHelp"]
+    }, setFrameModel );
+
+$("#modelMultimodal").on('click', {
+    inputId:"#modelMultimodal",
+    srcFrame: 'gemini_vision.html',
+    activeInput: ["#modelText", "#modelChatbot", "#modelHelp"]
+    }, setFrameModel );
+
+$("#modelChatbot").on('click', {
+    inputId:"#modelChatbot",
+    srcFrame: 'gemini_chat.html',
+    activeInput: ["#modelText", "#modelMultimodal", "#modelHelp"]
+    }, setFrameModel );
+    
+$("#modelHelp").on('click', {
+    inputId:"#modelHelp",
+    srcFrame: 'gemini_help.html',
+    activeInput: ["#modelText", "#modelMultimodal", "#modelChatbot"]
+    }, setFrameModel );
+
+$(".gemini").addClass("noaction");
+$( () => { footerbox.lastUpdate();});
+</script>
+
+<%- include('footer'); -%>

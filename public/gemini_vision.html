@@ -1,0 +1,201 @@
+<html>
+      <style>
+      p {
+	  background-color: #aff0fa;
+	  color: blue;
+	  font-family: monospace;
+	  margin: 2px;
+	  padding: 5px;
+      }
+      #response {
+	  background-color: #faf1f2;
+	  margin: 2px;
+	  padding: 5px;
+	  font-family: Arial, sans-serif;
+      }
+      h3 {
+	  color: blue;
+      }
+      .error {
+	  color: red;
+      }
+    </style>
+
+  <body>
+    <div>
+      <h3>gemini for text-and-images (multimodal) input</h3>
+
+      upload one image or several images (up to 16) <br />
+      from your local storage:<br />
+      <input type="file" ><button id="uploadLocal">upload</button>
+      <br />
+      <!--
+	  <input type="text" ><button id="uploadUrl">upload url image</button>
+	  -->
+      <div id="images"></div>
+      <label for="geminiPrompt">type your request for this (these) image(s):</label>
+	  <br/>
+	  <textarea id="geminiPrompt"
+		    name="geminiPrompt"
+		    rows="5" cols="40">
+	  </textarea>
+	  <br/>
+      <button id="run">run</button><button id="clear">clear</button>
+
+        <div id="geminiDisplay"></div>
+    </div>
+
+  </body>
+    <script type="importmap">
+      {
+        "imports": {
+          "@google/generative-ai": "https://esm.run/@google/generative-ai"
+        }
+      }
+    </script>
+    <script type="module">
+      import { GoogleGenerativeAI } from "@google/generative-ai";
+      const API_KEY = "AIzaSyBX_RZ3Ru-d20aXK7ZZfTZmJmicgph3K0Y";
+      const genAI = new GoogleGenerativeAI(API_KEY);
+
+      const displayDiv = document.getElementById('geminiDisplay');
+      const divImages = document.getElementById('images');
+      const clearButton = document.getElementById('clear');
+      var imageParts = [];
+      
+      const imageSupported = [
+	  'image/png',
+	  'image/jpeg',
+	  'image/webp',
+	  'image/heic',
+	  'image/heif',
+      ]
+      
+
+      // Converts a File object to a GoogleGenerativeAI.Part object.
+      async function fileToGenerativePart(file) {
+	  console.log(file.type);
+          const base64EncodedDataPromise = new Promise((resolve) => {
+              const reader = new FileReader();
+	      reader.onloadend = () => resolve(reader.result.split(',')[1]);
+              reader.readAsDataURL(file);
+          });
+          return {
+              inlineData: { data: await base64EncodedDataPromise,
+                            mimeType: file.type },
+	  };
+      }
+      
+      async function blobToGenerativePart( blob ) {
+	  const convertBlobToBase64 = new Promise((resolve, reject) => {
+	      const reader = new FileReader();
+	      reader.onerror = reject;
+	      reader.onload = () => {
+		  resolve(reader.result);
+	      };
+	      reader.readAsDataURL(blob);
+	  });
+	  const d = await convertBlobToBase64;
+	  //console.log(d);
+	  return {
+              inlineData: { data: d.split('base64,')[1], //await convertBlobToBase64,
+                            mimeType: blob.type  }
+	  };
+      }
+
+      function displayImage(b) {
+	  let img = document.createElement("img");
+	  img.src = b;
+	  img.width = 200;
+	  divImages.appendChild(img);
+      }
+
+      function display(prompt, response) {
+	  let promptDiv = document.createElement('p');
+	  let responseDiv = document.createElement('div');
+	  
+	  responseDiv.id = "response";
+	  displayDiv.append(promptDiv);
+	  promptDiv.innerText = prompt;
+	  displayDiv.append(responseDiv);
+	  responseDiv.innerText = response;
+	  displayDiv.append(document.createElement('hr'));
+	  //clearButton.style.display = "inline";
+      }
+      
+/*      
+      function displayImage(i, div) {
+	  let container = document.createElement('div');
+	  div.appendChild(container);
+	  let p = document.createElement('p');
+	  container.appendChild(p)
+	  p.innerText = i.inlineData.mimeType;
+	  let img = document.createElement("img");
+	  img.src  =  i.inlineData.data;
+	  img.width = 200;
+	  container.appendChild(img);
+	  //div.innerText += i.inlineData.mimeType;
+      }
+*/
+      async function uploadUrl ()  {
+	  const url = document.querySelector('input[type=text]').value;
+	  console.log(url);
+	  fetch (url)
+	      .then(response => {
+		  return response.blob();
+	      })
+	      .then(blob => {
+		  const b = blobToGenerativePart(blob);
+		  imageParts.push(b)
+		  return b;
+	      })
+	      .then(i => {
+		  displayImage('data:'+i.inlineData.mimeType+';base64,'+i.inlineData.data)
+	      })
+	  console.log(imageParts);
+      }
+
+      async function uploadLocal () {
+	  const fileInput = document.querySelector("input[type=file]");
+	  //console.log(fileInput.files[0]);
+	  //const fileParts = await fileToGenerativePart(fileInput.files[0]);
+	  if (imageSupported.includes(fileInput.files[0].type)) {
+	      const fileParts = await  Promise.all(
+		  [...fileInput.files].map(fileToGenerativePart)
+              );
+	      console.log(fileParts[0]);
+	      imageParts.push(fileParts[0]);
+	      displayImage('data:image/jpg;base64,'+fileParts[0].inlineData.data);
+	      console.log(imageParts);
+	  } else {
+	      divImages.innerHTML = "<span class=error>this is not an image, or this image type is not supported. clear and try again</span>";
+	  }	      
+      }
+
+      async function run() {
+	  const prompt = document.querySelector("textarea").value;
+	  const model = genAI.getGenerativeModel({ model: "gemini-pro-vision" });
+	  
+          const result = await model.generateContent([prompt, ...imageParts]);
+	  const response = await result.response;
+	  const text = response.text();
+	  console.log(text);
+	  display(prompt, text);
+
+      }
+
+      function clearDiv () {
+	  var imageParts = [];
+	  displayDiv.innerHTML = "";
+	  divImages.innerHTML = "";
+	  document.querySelector("textarea").value = "";
+      }
+
+      document.querySelector('#uploadLocal').addEventListener('click', uploadLocal)
+      document.querySelector('#run').addEventListener('click', run)
+      //document.querySelector('#uploadUrl').addEventListener('click', uploadUrl)
+      clearButton.addEventListener('click', clearDiv);
+      
+    </script>
+
+</html>
