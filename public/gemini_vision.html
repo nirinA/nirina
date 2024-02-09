@@ -25,7 +25,7 @@
     <div>
       <h3>gemini for text-and-images (multimodal) input</h3>
 
-      upload one image or several images (up to 16) <br />
+      upload one or several images (up to 16) <br />
       from your local storage:<br />
       <input type="file" ><button id="uploadLocal">upload</button>
       <br />
@@ -173,6 +173,9 @@
       }
 
       async function run() {
+	  if (imageParts === []) {
+	      divImages.innerHTML = "<span class=error>no image loaded. clear and try again</span>";
+	  }
 	  const prompt = document.querySelector("textarea").value;
 	  const model = genAI.getGenerativeModel({ model: "gemini-pro-vision" });
 	  

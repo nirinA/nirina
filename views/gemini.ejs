@@ -35,6 +35,9 @@ function setFrameModel ( event ) {
 	    src: event.data.srcFrame}).appendTo("#geminiFrame");
 }
 
+function displayHelp () {
+    $('#geminiFrame').html("<h3>gemini guide</h3> <p><a href='https://ai.google.dev/docs/concepts'>Large Language Models concepts</a></p><p><a href='https://ai.google.dev/docs/prompt_intros'>Prompting</a></p> <p><a href='https://ai.google.dev/docs/prompt_best_practicess'>Prompt strategies</a></p><p><a href='https://ai.google.dev/docs/multimodal_conceptss'>Multimodal prompts</a></p>");
+}
 
 $("#modelText").css({"background-color":"rgb(220 220 220 / 100%)",
                          "color":"#555",
@@ -64,11 +67,7 @@ $("#modelChatbot").on('click', {
     activeInput: ["#modelText", "#modelMultimodal", "#modelHelp"]
     }, setFrameModel );
     
-$("#modelHelp").on('click', {
-    inputId:"#modelHelp",
-    srcFrame: 'gemini_help.html',
-    activeInput: ["#modelText", "#modelMultimodal", "#modelChatbot"]
-    }, setFrameModel );
+$("#modelHelp").on('click', displayHelp );
 
 $(".gemini").addClass("noaction");
 $( () => { footerbox.lastUpdate();});
