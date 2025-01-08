@@ -5,7 +5,7 @@ var bannerLinks = new Map([
     //["antisocial", "https://nirina.raseliarison.mg/ossn"],
     ["gemini", "/gemini"],
     ["login", "/login"],
-])
+]);
 
 var navbanner = {
     activate: () => {

@@ -18,6 +18,7 @@ var FormatDate = {
         var mo = now.getMonth();
         var da = now.getDay();
         var dd = now.getDate();
+		var marainasahariva;
         if (10 > dd) {
             dd = '0' + dd;
         }
@@ -46,7 +47,6 @@ var FormatDate = {
         if (lang == "mg") {
             mo = volana[mo];
             da = andro[da];
-            var marainasahariva;
             if ( hr <= 10 ) {
                 marainasahariva = "maraina";
             } else if ( (hr <= 12) && (hr >= 11) ) {
@@ -71,7 +71,6 @@ var FormatDate = {
         if (lang == "plain_mg") {
             mo = volana[mo];
             da = andro[da];
-            var marainasahariva;
             if ( hr <= 5 ) {
                 marainasahariva = "alina";
             } else if ( hr < 5 && hr <= 6 ) {

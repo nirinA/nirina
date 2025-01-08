@@ -8,11 +8,6 @@ body {
     padding: 5px;
     font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
-@media (max-width: 680px) {
-    body {
-	background-color: #abcdef !important;
-	}
-}
 .homebanner {
     background-color: #567890;
     color: white; /*#aaa;*/
@@ -21,6 +16,16 @@ body {
     margin: 0px;
     padding: 0px;
     /*width: 80%;*/
+}
+@media scren and (max-width: 800px) {
+    body {
+	background-color: #abcdef !important;
+	font: 12px;
+    }
+    .homenavbar {
+	display: flex;
+	width: 100%;
+    }
 }
 .homenavbar {
     /* display: flex; */
@@ -42,6 +47,7 @@ body {
     background-image:linear-gradient(90deg, #0a0a0a 2%, #a0a0a0 100%);*/
     background-image: linear-gradient(to right, red,orange,yellow,green,blue,indigo,violet); 
     -webkit-background-clip: text;
+    background-clip: text;
     -webkit-text-fill-color: transparent;
     cursor: pointer;
     padding:0px; /* 0px 5px 0px;*/
@@ -78,7 +84,7 @@ a:hover {
     color: #00ff00;
 }
 #logo {
-    margin-leftright: 5px;
+    margin-right: 5px;
     float: right;
     cursor: pointer;
 }

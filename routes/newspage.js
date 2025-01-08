@@ -66,12 +66,14 @@ for (let a of nature) {
 
 for (let a of arXiv) {
     router.get("/arxiv/"+a, async (req, res, next) => {
-	var user = null;
+	let user = null;
 	if (req.user) {
 	    user = req.user;
 	}
 	try {
 	    let feed = await parser.parseURL("https://export.arxiv.org/rss/"+a);
+	    //let rss = await fs.promises.readFile('public/math-20240216.xml', 'utf-8');
+	    //let feed = await parser.parseString(rss);
 	    res.render("arxiv", {data: feed});
 	} catch (err) {
 	    next(err)
@@ -203,13 +205,13 @@ router.get("/plos", async (req, res, next) => {
 	user = req.user;
     }
     try {
-	//let feed = await parser.parseURL("");
-	let rss = await pfs.readFile(path.join(__dirname,'plosone_atom.rss'), "utf-8");
-	let feed = await parser.parseString(rss);
+	let feed = await parser.parseURL("https://journals.plos.org/plosone/feed/atom");
+	//let rss = await pfs.readFile(path.join(__dirname,'plosone_atom.rss'), "utf-8");
+	//let feed = await parser.parseString(rss);
 	res.render("plos", {data: feed, user: user});
 	//res.send(feed);
 	} catch (err) {
-            next(err);
+		next(err);
 	}
 });
 
@@ -221,7 +223,7 @@ router.get("/eumesat", async (req, res, next) => {
     try {
 	res.render("eumesat", {user: user});
     } catch (err) {
-	next(err);
+		next(err);
     }
 });
 

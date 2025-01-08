@@ -1,8 +1,8 @@
 var express = require('express');
 var router = express.Router();
-const fs = require('fs');
-const { appendFile, mkdir } = require('fs/promises');
-const { join } = require('path');
+var fs = require('fs');
+var { appendFile, mkdir } = require('fs/promises');
+var { join } = require('path');
 var touch = require("touch")
 
 let items = [];
@@ -11,8 +11,8 @@ fs.readFile(wikifile, async (err, buffer) => {
     if (err) {
 		console.log('no wiki file, creating the folder');
 		try {
-		    const wikiFolder = join(__dirname,'..', 'public', 'wiki');
-		    const createDir = await mkdir(wikiFolder, { recursive: true });
+		    let wikiFolder = join(__dirname,'..', 'public', 'wiki');
+		    let createDir = await mkdir(wikiFolder, { recursive: true });
 		    console.log(`created ${createDir}`);
 		    touch(wikifile);
 		} catch (err) {

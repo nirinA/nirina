@@ -4,7 +4,7 @@ var router = express.Router();
 router.get('/', function(req, res, next) {
     if (req.user) {
 	res.render('gemini', { title: 'gemini', user: req.user});
-	return
+	return;
     }
     next();
 } , function(req, res, next) {

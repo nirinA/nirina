@@ -6,7 +6,7 @@ var homebanner = {
 	    $("."+l+".home-item").click(() => {
 		location.href=links.get(l);
 	    });
-	};
+	}
     },
 };
 
@@ -18,7 +18,7 @@ var links = new Map([
     ["artisanat", "https://raseliarison.mg/artisanat"],
     ["code", "https://raseliarison.mg/code"], //'https://github.com/nirinA'],
     ["FAQ", "https://raseliarison.mg/faq"], //"http://raseliarison.chez.com/FAQ.html"
-])
+]);
 
 // footer
 var footerbox = {
@@ -28,7 +28,7 @@ var footerbox = {
 	//foot.insertAfter('#maindisplay');
 	let date = new Date();
 	foot.attr({'id': 'lastUpdate'});
-	foot.html("last update: "+date.toDateString())
+	foot.html("last update: "+date.toDateString());
     }
 };
 
